@@ -11,9 +11,10 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.List;
 
 public class RecAdapter extends RecyclerView.Adapter<RecViewHolder> {
-    LayoutInflater inflater;
-    List<GitHubRepo> reposList;
-    public RecAdapter (Context context, List<GitHubRepo> list){
+    private LayoutInflater inflater;
+    private List<GitHubRepo> reposList;
+
+    public RecAdapter(Context context, List<GitHubRepo> list) {
         this.reposList = list;
         this.inflater = LayoutInflater.from(context);
     }
@@ -33,6 +34,6 @@ public class RecAdapter extends RecyclerView.Adapter<RecViewHolder> {
 
     @Override
     public int getItemCount() {
-            return reposList.size();
+        return reposList.size();
     }
 }

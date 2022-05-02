@@ -15,22 +15,21 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class MainActivity extends AppCompatActivity {
-    RecyclerView recyclerView;
+    private RecyclerView recyclerView;
+    private final static String baseURL = "https://api.github.com/";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Retrofit.Builder builder = new Retrofit.Builder()
-                .baseUrl("https://api.github.com/")
+                .baseUrl(baseURL)
                 .addConverterFactory(GsonConverterFactory.create());
 
         Retrofit retrofit = builder.build();
         GitHubClient client = retrofit.create(GitHubClient.class);
 
         recyclerView = findViewById(R.id.recycler_view);
-        LinearLayoutManager llm = new LinearLayoutManager(this);
-        llm.setOrientation(LinearLayoutManager.VERTICAL);
-        recyclerView.setLayoutManager(llm);
+
         Call<List<GitHubRepo>> call = client.reposForUser("BogdanStarunskiy");
         call.enqueue(new Callback<List<GitHubRepo>>() {
             @Override
@@ -44,8 +43,6 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
-
-
 
 
     }
